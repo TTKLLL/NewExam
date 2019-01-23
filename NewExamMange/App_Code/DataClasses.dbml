@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="NewExam" Class="DataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=172.16.25.2;Initial Catalog=NewExam;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="NewExamConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Authority" Member="Authority">
+    <Type Name="Authority">
+      <Column Name="AuthorityId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AuhorityName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="OrderNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ImgUrl" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="AothorityLink" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Leval" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AuthorityType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AuthorityExamType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TopicSource" Member="TopicSource">
+    <Type Name="TopicSource">
+      <Column Name="TopicSourceId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TopicSourceName" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="IsChose" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Class" Member="Class">
+    <Type Name="Class">
+      <Column Name="ClassId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ClassName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Exam" Member="Exam">
+    <Type Name="Exam">
+      <Column Name="ExamId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TheExamId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="ExamBegTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ExamEndTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ExamPeriod" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NowPeriod" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PaperNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Exam_Invigilate" Member="Invigilate" ThisKey="ExamId" OtherKey="ExamId" Type="Invigilate" />
+      <Association Name="Exam_StuPaper" Member="StuPaper" ThisKey="ExamId" OtherKey="ExamId" Type="StuPaper" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ExamType" Member="ExamType">
+    <Type Name="ExamType">
+      <Column Name="ExamTypeId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ExamTypeName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IsChose" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamTypeFlag" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FirstPoint" Member="FirstPoint">
+    <Type Name="FirstPoint">
+      <Column Name="FirstPointId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstPointName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="FirstPointOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Invigilate" Member="Invigilate">
+    <Type Name="Invigilate">
+      <Column Name="ExamId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TId" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ExamRoomName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ExamRoomPosition" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="OtherTeacher" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Exam_Invigilate" Member="Exam" ThisKey="ExamId" OtherKey="ExamId" Type="Exam" IsForeignKey="true" />
+      <Association Name="Teacher_Invigilate" Member="Teacher" ThisKey="TId" OtherKey="TId" Type="Teacher" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Paper" Member="Paper">
+    <Type Name="Paper">
+      <Column Name="PaperId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ExamId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PaperDetail" Member="PaperDetail">
+    <Type Name="PaperDetail">
+      <Column Name="TopicId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PaperId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TopicScore" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PracticalTopic" Member="PracticalTopic">
+    <Type Name="PracticalTopic">
+      <Column Name="Tid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TopicPath" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="TopicState" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TopicDesc" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="TopicName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="TopicUpTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Chose" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SecondPoint" Member="SecondPoint">
+    <Type Name="SecondPoint">
+      <Column Name="SecondPointId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FIrstPointId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="SecondPointName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SecondPointOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsChose" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="choseNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Sort" Member="Sort">
+    <Type Name="Sort">
+      <Column Name="SortId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SortName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="TopicSortScore" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TopicSortNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Student" Member="Student">
+    <Type Name="Student">
+      <Column Name="StudentId" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StudentName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="StudentPhone" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="StuImage" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="Class" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="RegisterTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="StudentState" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StuExamState" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.StuExam" Member="StuExam">
+    <Type Name="StuExam">
+      <Column Name="StudentId" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PaperId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TId" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IPAddress" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Score" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ReplyEndTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="BeginExamTIme" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.StuPaper" Member="StuPaper">
+    <Type Name="StuPaper">
+      <Column Name="TopicId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StudentId" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StuAnswer" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="ExamId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="stuAnsPath" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Association Name="Exam_StuPaper" Member="Exam" ThisKey="ExamId" OtherKey="ExamId" Type="Exam" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TeaAuthority" Member="TeaAuthority">
+    <Type Name="TeaAuthority">
+      <Column Name="TId" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AuthorityId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Teacher" Member="Teacher">
+    <Type Name="Teacher">
+      <Column Name="TId" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TPwd" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TName" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="TPhone" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="IsAdmin" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TeacherState" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TeacherCreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="isExamTeacher" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Teacher_Invigilate" Member="Invigilate" ThisKey="TId" OtherKey="TId" Type="Invigilate" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TheExam" Member="TheExam">
+    <Type Name="TheExam">
+      <Column Name="TheExamId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TheExamName" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
+      <Column Name="IsNowTheExam" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Topic" Member="Topic">
+    <Type Name="Topic">
+      <Column Name="TopicId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SortId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="SecondPointId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="TopicTitle" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="OptionA" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="OptionB" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="OptionC" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="OptionD" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="TitleAnswer" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="TopicType" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="SourceName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IsExists" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsAccept" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NumberOfUse" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TopicCreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TopicState" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TopicSourceId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.proc_getAuthority" Method="proc_getAuthority">
+    <Parameter Name="Tid" Parameter="tid" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="proc_getAuthorityResult">
+      <Column Name="AuthorityId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="AuhorityName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="OrderNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ImgUrl" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="AothorityLink" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Leval" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AuthorityType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TId" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="AuthorityId1" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.proc_UpdateTeacherById" Method="proc_UpdateTeacherById">
+    <Parameter Name="TName" Parameter="tName" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="TPhone" Parameter="tPhone" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="TId" Parameter="tId" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.proc_getTeacherInfo" Method="proc_getTeacherInfo">
+    <Parameter Name="Tid" Parameter="tid" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="proc_getTeacherInfoResult">
+      <Column Name="TId" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TPwd" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TName" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="TPhone" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="IsAdmin" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TeacherState" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TeacherCreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="isExamTeacher" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.proc_LogIn" Method="proc_LogIn">
+    <Parameter Name="uId" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="pwd" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="res" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.proc_ResetTeacherPwd" Method="proc_ResetTeacherPwd">
+    <Parameter Name="TPWd" Parameter="tPWd" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="TId" Parameter="tId" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.proc_selectExistTeaByTId" Method="proc_selectExistTeaByTId">
+    <Parameter Name="TId" Parameter="tId" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Proc_SellectAllTeacher" Method="Proc_SellectAllTeacher">
+    <ElementType Name="Proc_SellectAllTeacherResult">
+      <Column Name="TId" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TPwd" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TName" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="TPhone" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="IsAdmin" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TeacherState" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TeacherCreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="isExamTeacher" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Proc_SellectTeacherInfoByTId" Method="Proc_SellectTeacherInfoByTId">
+    <Parameter Name="TId" Parameter="tId" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="Proc_SellectTeacherInfoByTIdResult">
+      <Column Name="TId" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TPwd" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TName" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="TPhone" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="IsAdmin" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TeacherState" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TeacherCreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="isExamTeacher" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>
